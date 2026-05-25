@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="~{fragments/layout :: head('Nuevo Lugar')}"></head>
+
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin/venues">Lugares</a></li>
+            <li class="breadcrumb-item active">Nuevo Lugar</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <i class="bi bi-plus-circle"></i> Registrar Nuevo Lugar
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/admin/venues/save}"
+                          th:object="${venue}"
+                          method="post">
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label fw-semibold">Nombre del Lugar</label>
+                            <input type="text" id="name" th:field="*{name}"
+                                   class="form-control"
+                                   placeholder="Ej: Teatro Municipal" required/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label fw-semibold">Dirección</label>
+                            <input type="text" id="address" th:field="*{address}"
+                                   class="form-control"
+                                   placeholder="Ej: Cra. 65 #8B-91, Medellín" required/>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="capacity" class="form-label fw-semibold">Capacidad (personas)</label>
+                            <input type="number" id="capacity" th:field="*{capacity}"
+                                   class="form-control" min="1"
+                                   placeholder="Ej: 500" required/>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> Guardar Lugar
+                            </button>
+                            <a href="/admin/venues" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
